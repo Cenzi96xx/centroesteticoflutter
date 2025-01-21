@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Questo bottone deve essere visibile solo se l'utente NON è un amministratore
-            if (!isAdmin)
+            if (isAdmin)
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.pushNamed(
                     context,
                     '/manageAppointments',
-                    arguments: {'isAdmin': isAdmin},
+                    arguments: {'isAdmin': isAdmin}, // Assicurati di passare 'isAdmin'
                   );
                 },
                 child: Text('Gestisci Appuntamenti'),

@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/home': (context) => HomeScreen(),
         '/adduserscreen': (context) => AddUserScreen(),
-        // Rimuoviamo la navigazione diretta a ManageAppointmentsScreen qui
       },
       onGenerateRoute: (settings) {
         // Gestisce la route per l'appuntamento
@@ -50,6 +49,15 @@ class MyApp extends StatelessWidget {
             ),
           );
         }
+        // Gestisce la route per la gestione degli appuntamenti
+        if (settings.name == '/manageAppointments') {
+          final args = settings.arguments as Map<String, dynamic>;
+          return MaterialPageRoute(
+            builder: (context) => ManageAppointmentsScreen(
+              isAdmin: args['isAdmin'] ?? false, // Passa il parametro obbligatorio
+            ),
+          );
+        }
         // Gestisce la route per il calendario
         if (settings.name == '/schedule_appointment') {
           final args = settings.arguments as Map<String, dynamic>;
@@ -60,8 +68,7 @@ class MyApp extends StatelessWidget {
             ),
           );
         }
-        // Gestisce la route per la gestione degli appuntamenti
-
+        return null; // Restituisce null se nessuna route corrisponde
       },
     );
   }
