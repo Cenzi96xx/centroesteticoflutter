@@ -47,15 +47,15 @@ class _ManageAppointmentsScreenState extends State<ManageAppointmentsScreen> {
   Future<void> _updateAppointmentStatus(int appointmentId, String status, int userId) async {
     try {
       final response = await http.put(
-        Uri.parse('https://centro-dnz3.onrender.com/appuntamenti/$appointmentId'),
+        Uri.parse('https://centro-dnz3.onrender.com/appuntamenti/$appointmentId/stato'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({'stato': status, 'userId': userId.toString()}),
+        body: json.encode({'stato': status}),
       );
 
       if (response.statusCode == 200) {
         setState(() {
           // Rimuove l'appuntamento dalla lista
-          _appointments.removeWhere((appointment) => appointment['id'] == appointmentId);
+          _appointments.removeWhere((appointment) => appointment['id_appuntamento'] == appointmentId);
         });
 
         // Mostra una notifica di successo

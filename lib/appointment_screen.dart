@@ -72,6 +72,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     final url = Uri.parse('https://centro-dnz3.onrender.com/appuntamenti');
     final response = await http.post(url, body: json.encode({
       'id_utente': widget.isAdmin ? _selectedUserId : widget.userId,
+      'is_admin': widget.isAdmin,
       'data_inizio': widget.selectedDate.toIso8601String(),
       'stato': widget.isAdmin ? 'accettato' : 'in attesa',
       'id_servizi': _selectedServices,
@@ -97,6 +98,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         title: const Text('Prenota Appuntamento'),
       ),
       body: SafeArea(
+        minimum: const EdgeInsets.only(bottom: 16.0), // Aggiunge spazio minimo in basso
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
